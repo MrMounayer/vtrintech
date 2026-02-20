@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function vitrines()
+    {
+        return $this->hasMany(Vitrine::class);
+    }
 }
