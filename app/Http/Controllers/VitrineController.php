@@ -8,6 +8,6 @@ class VitrineController extends Controller
 {
     public function show(Vitrine $vitrine): \Illuminate\View\View
     {
-        return view('vitrines.lang', ['vitrine' => $vitrine]);
+        return view('vitrines.doctors', ['vitrine' => $vitrine]);
     }
 }
