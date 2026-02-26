@@ -34,6 +34,7 @@ class MyvritrinePanelProvider extends PanelProvider
             ->viteTheme('resources/css/filament/myvitrine/theme.css')
             ->login()
             ->registration()
+            ->profile()
             ->colors([
                 'primary' => Color::Amber,
             ])
