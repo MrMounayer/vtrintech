@@ -25,9 +25,6 @@ class MyvritrinePanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->plugins([
-                AuthUIEnhancerPlugin::make(),
-            ])
             ->default()
             ->id('myvitrine')
             ->path('myvitrine')

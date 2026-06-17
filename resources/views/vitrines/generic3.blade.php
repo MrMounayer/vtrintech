@@ -1276,7 +1276,7 @@
         }
     </style>
 </head>
-<body class="theme-primrose">
+<body class="theme-{{ $vitrine->theme }}">
 
     {{-- ===== HERO: Split Screen ===== --}}
     <section class="hero">
@@ -1319,13 +1319,14 @@
     @endif
 
     {{-- ===== SERVICES: Bento Grid ===== --}}
+    @if(!empty($vitrine->services) && count($vitrine->services) > 0)
     <section class="services-section" id="services">
         <div class="section-header">
             <p class="section-label">Expertise</p>
             <h2 class="section-title">What I Do</h2>
         </div>
 
-        @if(!empty($vitrine->services) && count($vitrine->services) > 0)
+        
             <div class="bento-grid">
                 @foreach($vitrine->services as $index => $service)
                     <div class="bento-item {{ $index === 0 && count($vitrine->services) >= 4 ? 'featured' : '' }}">
@@ -1336,23 +1337,22 @@
                     </div>
                 @endforeach
             </div>
-        @else
-            <p style="text-align:center;color:var(--text-muted);padding:60px;">Services coming soon...</p>
+        </section>
         @endif
-    </section>
+
+
 
     {{-- ===== IMAGE CAROUSEL ===== --}}
+    @php
+        $carouselImages = $vitrine->getMedia('carousel');
+    @endphp
+    
+    @if($carouselImages->isNotEmpty())
     <section class="carousel-section">
         <div class="section-header">
             <p class="section-label">Portfolio</p>
             <h2 class="section-title">Recent Work</h2>
         </div>
-
-        @php
-            $carouselImages = $vitrine->getMedia('carousel');
-        @endphp
-
-        @if($carouselImages->isNotEmpty())
             <div class="carousel-wrapper">
                 <button type="button" class="carousel-btn prev" onclick="scrollCarousel(-1)" aria-label="Scroll previous">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1378,9 +1378,6 @@
                     </svg>
                 </button>
             </div>
-        @else
-            <p style="text-align:center;color:var(--text-muted);padding:60px;">Gallery coming soon...</p>
-        @endif
 
         <div id="fullscreen-overlay" class="fullscreen-overlay" aria-hidden="true" onclick="closeFullscreen(event)">
             <div class="fullscreen-card" role="dialog" aria-modal="true" onclick="event.stopPropagation()">
@@ -1390,6 +1387,7 @@
             </div>
         </div>
     </section>
+    @endif
 
     {{-- ===== CTA: Full Bleed ===== --}}
     <section class="cta-section ">

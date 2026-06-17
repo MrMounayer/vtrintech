@@ -40,7 +40,7 @@ class VitrinesTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()->disabled(),
                 ]),
             ]);
     }

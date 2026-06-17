@@ -14,7 +14,7 @@ class ListVitrines extends ListRecords
     {
         return [
             CreateAction::make()->visible(fn () => 
-            auth()->user()->vitrines()->count() < 3
+            auth()->user()->vitrines()->count() < 1
             ),
         ];
     }

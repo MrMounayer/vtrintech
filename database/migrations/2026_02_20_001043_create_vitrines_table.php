@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('cta')->nullable();
             $table->string('cta_description')->nullable();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('language')->default('en');
+            $table->string('theme')->default('default');
         });
     }
 

@@ -26,13 +26,13 @@ class VitrineForm
                     ->required(),
                     Textarea::make('description')
                         ->ColumnSpanFull(),
+                    Select::make('language')
+                        ->label('Language')
+                        ->options(Vitrine::langOptions())
+                        ->required(),
                     Select::make('theme')
                         ->label('Theme')
                         ->options(Vitrine::themeOptions())
-                        ->required(),
-                    Select::make('style')
-                        ->label('Style')
-                        ->options(Vitrine::styleOptions())
                         ->required(),
                 Repeater::make('links')
                 ->label('Social Links')
@@ -192,7 +192,6 @@ class VitrineForm
                 ])
                 ->columns(1)
                 ->addActionLabel('Add Service')
-                ->minItems(1)
                 ,
                 TextInput::make('whatsapp')
                     ->placeholder("+213556223344")

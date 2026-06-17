@@ -19,13 +19,13 @@ class Vitrine extends Model implements HasMedia
         'services' => 'array',
     ];
 
-    public const THEME_OPTIONS = [
+    public const LANG_OPTIONS = [
         'generic3' => 'Default',
         'generic3_fr' => 'French',
         'generic3_ar' => 'Arabic',
     ];
 
-    public const STYLE_OPTIONS = [
+    public const THEME_OPTIONS = [
         'default' => 'Default',
         'midnight' => 'Midnight',
         'sunset' => 'Sunset',
@@ -87,9 +87,9 @@ class Vitrine extends Model implements HasMedia
         return self::THEME_OPTIONS;
     }
 
-    public static function styleOptions(): array
+    public static function langOptions(): array
     {
-        return self::STYLE_OPTIONS;
+        return self::LANG_OPTIONS;
     }
 
     public static function themeViewMap(): array

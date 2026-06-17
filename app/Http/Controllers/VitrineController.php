@@ -6,11 +6,12 @@ use App\Models\Vitrine;
 
 class VitrineController extends Controller
 {
-    public function show(Vitrine $vitrine): \Illuminate\View\View
+    public function show($domain): \Illuminate\View\View
     {
-        return view($vitrine->getThemeView(), [
+        $vitrine = Vitrine::where('domain', $domain)->firstOrFail();
+        
+        return view("vitrines.generic3", [
             'vitrine' => $vitrine,
-            'style' => $vitrine->getStyleClass(),
         ]);
     }
 
