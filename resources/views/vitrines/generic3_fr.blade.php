@@ -877,7 +877,7 @@
 
         /* Line break at 3: first row takes 3, second row takes remaining */
         .bento-item {
-            background: var(--accent-light);
+            background: var(--surface);
             border-radius: 24px;
             padding: 32px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -943,8 +943,8 @@
         .carousel-section {
             padding: 100px 8vw;
             max-width: 1400px;
-            margin: 64px auto;
-            background: var(--accent-light);
+            margin: 0 auto;
+            background: var(--surface);
             border-radius: 32px;
             border: 1px solid rgba(15, 23, 42, 0.08);
             box-shadow: 0 24px 80px rgba(15, 23, 42, 0.04);
@@ -1142,7 +1142,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at 50% 50%, var(--accent-light) 0%, var(--accent) 50%);
+            background: radial-gradient(circle at 50% 50%, rgba(99,102,241,0.15) 0%, transparent 50%);
         }
 
         .cta-content {
@@ -1276,13 +1276,13 @@
         }
     </style>
 </head>
-<body class="theme-primrose">
+<body class="{{ $style ?? 'theme-default' }}">
 
     {{-- ===== HERO: Split Screen ===== --}}
     <section class="hero">
         <div class="hero-content">
-            <p class="greeting">Hello, We Are</p>
-            <h1 class="hero-name">{{ $vitrine->name ?? 'Your Name' }}<span>.</span></h1>
+            <p class="greeting">Bonjour, je suis</p>
+            <h1 class="hero-name">{{ $vitrine->name ?? 'Votre Nom' }}<span>.</span></h1>
             
             @if(!empty($vitrine->description))
                 <p class="tagline">{{ $vitrine->description }}</p>
@@ -1322,7 +1322,7 @@
     <section class="services-section" id="services">
         <div class="section-header">
             <p class="section-label">Expertise</p>
-            <h2 class="section-title">What I Do</h2>
+            <h2 class="section-title">Ce que je fais</h2>
         </div>
 
         @if(!empty($vitrine->services) && count($vitrine->services) > 0)
@@ -1337,15 +1337,15 @@
                 @endforeach
             </div>
         @else
-            <p style="text-align:center;color:var(--text-muted);padding:60px;">Services coming soon...</p>
+            <p style="text-align:center;color:var(--text-muted);padding:60px;">Services bientôt disponibles...</p>
         @endif
     </section>
 
     {{-- ===== IMAGE CAROUSEL ===== --}}
     <section class="carousel-section">
         <div class="section-header">
-            <p class="section-label">Portfolio</p>
-            <h2 class="section-title">Recent Work</h2>
+            <p class="section-label">Réalisations</p>
+            <h2 class="section-title">Réalisations récentes</h2>
         </div>
 
         @php
@@ -1364,11 +1364,16 @@
                         <div class="carousel-card">
                             <img
                                 src="{{ $image->getUrl() }}"
-                                alt="{{ $image->name ?: 'Portfolio image' }}"
+                                alt="{{ $image->name ?: 'Image de portfolio' }}"
                                 onclick="openFullscreen(this)"
                                 data-fullscreen-src="{{ $image->getUrl() }}"
+                                {{-- data-title="{{ $image->name ?? 'Image de projet' }}" --}}
+                                {{-- data-description="{{ $image->custom_properties['description'] ?? 'Un aperçu du travail réalisé.' }}" --}}
                                 style="cursor:pointer;"
                             />
+                            {{-- <div class="carousel-caption">
+                                <strong>{{ $image->name ?? 'Image de projet' }}</strong>
+                            </div> --}}
                         </div>
                     @endforeach
                 </div>
@@ -1379,23 +1384,26 @@
                 </button>
             </div>
         @else
-            <p style="text-align:center;color:var(--text-muted);padding:60px;">Gallery coming soon...</p>
+            <p style="text-align:center;color:var(--text-muted);padding:60px;">Galerie bientôt disponible...</p>
         @endif
 
         <div id="fullscreen-overlay" class="fullscreen-overlay" aria-hidden="true" onclick="closeFullscreen(event)">
             <div class="fullscreen-card" role="dialog" aria-modal="true" onclick="event.stopPropagation()">
                 <button type="button" class="fullscreen-close" onclick="closeFullscreen(event)" aria-label="Close full screen">×</button>
                 <img id="fullscreen-image" src="" alt="" />
-      
+                {{-- <div class="fullscreen-caption">
+                        <strong id="fullscreen-title"></strong>
+                    <p id="fullscreen-description"></p>
+                </div> --}}
             </div>
         </div>
     </section>
 
     {{-- ===== CTA: Full Bleed ===== --}}
-    <section class="cta-section ">
+    <section class="cta-section">
         <div class="cta-content">
-            <h2 class="cta-title">{{ !empty($vitrine->cta) ? $vitrine->cta : "Let's Build Something Amazing" }}</h2>
-            <p class="cta-subtitle">{{ $vitrine->cta_description ?? "Ready to start your next project? I'm just a message away." }}</p>
+            <h2 class="cta-title">{{ !empty($vitrine->cta) ? $vitrine->cta : "Créons quelque chose d'incroyable" }}</h2>
+            <p class="cta-subtitle">{{ $vitrine->cta_description ?? "Prêt à démarrer votre prochain projet ? Je suis à un message de distance." }}</p>
             
             <a 
                 href="https://wa.me/{{ $vitrine->whatsapp ?? '' }}?text=SLM" 
@@ -1405,7 +1413,7 @@
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
                 </svg>
-                Chat on WhatsApp
+                Discuter sur WhatsApp
             </a>
         </div>
     </section>

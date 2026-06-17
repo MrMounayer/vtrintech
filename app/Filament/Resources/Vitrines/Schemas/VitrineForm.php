@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Vitrines\Schemas;
 
+use App\Models\Vitrine;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
@@ -15,27 +16,39 @@ class VitrineForm
     public static function configure(Schema $schema): Schema
     {
         return $schema
-            ->components([
+        ->components([
+                TextInput::make('domain')
+                ->label('Domain')
+                 ->prefix('https://')
+                ->suffix('.vtrinetech.com')
+                ->required(),
                 TextInput::make('name')
                     ->required(),
-                    TextInput::make('slug')
-                    ->label('Domain')
-                    ->required(),
                     Textarea::make('description')
-                    ->ColumnSpanFull(),
+                        ->ColumnSpanFull(),
+                    Select::make('theme')
+                        ->label('Theme')
+                        ->options(Vitrine::themeOptions())
+                        ->required(),
+                    Select::make('style')
+                        ->label('Style')
+                        ->options(Vitrine::styleOptions())
+                        ->required(),
                 Repeater::make('links')
+                ->label('Social Links')
                     ->schema([
                         Select::make('label')
                         ->options([
                             'GitHub' => 'GitHub',
                             'Twitter' => 'Twitter',
-                            'LinkedIn' => 'LinkedIn',
                             'Facebook' => 'Facebook',
                             'Instagram' => 'Instagram',
                             'Website' => 'Website',
                             'TikTok' => 'TikTok',
                             'YouTube' => 'YouTube',
                             'Snapchat' => 'Snapchat',
+                            'Telegram' => 'Telegram',
+                            'Gmail' => 'Gmail',
                         ])
                             ->required(),
                         TextInput::make('url')
@@ -43,21 +56,147 @@ class VitrineForm
                             ->url(),
                     ])
                     ->columnSpanFull(),
-                Select::make('settings')
-                    ->label('Theme')
-                    ->options(["light" => "Light", "dark" => "Dark", "system" => "System"])
+                SpatieMediaLibraryFileUpload::make('logo')
+                    ->collection('logo')
                     ->required()
                     ->columnSpanFull(),
-                SpatieMediaLibraryFileUpload::make('hero')
-                    ->collection('hero')
-                    ->required(),
-                SpatieMediaLibraryFileUpload::make('background')
-                    ->collection('background'),
                 SpatieMediaLibraryFileUpload::make('carousel')
                     ->multiple()
                     ->reorderable()
                     ->columnSpanFull()
                     ->collection('carousel'),
+                Repeater::make('services')
+                ->schema([
+                    Select::make('icon')
+                        ->label('Icon')
+                        ->options([
+                           '🎨' => '🎨',
+                            '💻' => '💻',
+                            '📱' => '📱',
+                            '⚙️' => '⚙️',
+                            '🔒' => '🔒',
+                            '📊' => '📊',
+                            '🚀' => '🚀',
+                            '❤️' => '❤️',
+                            '⭐' => '⭐',
+                            '✓' => '✓',
+                            '💡' => '💡',
+                            '🔧' => '🔧',
+                            '📁' => '📁',
+                            '🌐' => '🌐',
+                            '📧' => '📧',
+                            '📞' => '📞',
+                            '👤' => '👤',
+                            '👥' => '👥',
+                            '💬' => '💬',
+                            '🔔' => '🔔',
+                            '📷' => '📷',
+                            '🎬' => '🎬',
+                            '🎵' => '🎵',
+                            '📚' => '📚',
+                            '🏆' => '🏆',
+                            '💰' => '💰',
+                            '📈' => '📈',
+                            '🔥' => '🔥',
+                            '🆕' => '🆕',
+                            '⏰' => '⏰',
+                            '📅' => '📅',
+                            '📍' => '📍',
+                            '🛒' => '🛒',
+                            '🎁' => '🎁',
+                            '🔗' => '🔗',
+                            '📤' => '📤',
+                            '📥' => '📥',
+                            '🗑️' => '🗑️',
+                            '✏️' => '✏️',
+                            '👁' => '👁',
+                            '🚫' => '🚫',
+                            '❓' => '❓',
+                            'ℹ️' => 'ℹ️',
+                            '⬇️' => '⬇️',
+                            '⬆️' => '⬆️',
+                            '◀' => '◀',
+                            '▶' => '▶',
+                            '▲' => '▲',
+                            '▼' => '▼',
+                            '🎯' => '🎯',
+                            '📐' => '📐',
+                            '📏' => '📏',
+                            '✂️' => '✂️',
+                            '🖇️' => '🖇️',
+                            '📋' => '📋',
+                            '🖊️' => '🖊️',
+                            '🖋️' => '🖋️',
+                            '✒️' => '✒️',
+                            '📝' => '📝',
+                            '📌' => '📌',
+                            '📎' => '📎',
+                            '🔖' => '🔖',
+                            '🏷️' => '🏷️',
+                            '🎪' => '🎪',
+                            '🎭' => '🎭',
+                            '🖼️' => '🖼️',
+                            '🎚️' => '🎚️',
+                            '🎛️' => '🎛️',
+                            '🎧' => '🎧',
+                            '🎤' => '🎤',
+                            '🎹' => '🎹',
+                            '🎸' => '🎸',
+                            '🎻' => '🎻',
+                            '🥁' => '🥁',
+                            '📢' => '📢',
+                            '📣' => '📣',
+                            '📯' => '📯',
+                            '🎮' => '🎮',
+                            '🎲' => '🎲',
+                            '🎳' => '🎳',
+                            '🎰' => '🎰',
+                            '🃏' => '🃏',
+                            '🎴' => '🎴',
+                            '🏅' => '🏅',
+                            '🥇' => '🥇',
+                            '🥈' => '🥈',
+                            '🥉' => '🥉',
+                            '⚽' => '⚽',
+                            '🏀' => '🏀',
+                            '🏈' => '🏈',
+                            '⚾' => '⚾',
+                            '🎾' => '🎾',
+                            '🏐' => '🏐',
+                            '🏉' => '🏉',
+                            '🎱' => '🎱',
+                            '🪃' => '🪃',
+                            '🏹' => '🏹',
+                            '🛡️' => '🛡️',
+                            '🔪' => '🔪',
+                            '💣' => '💣',
+                            '⛈️' => '⛈️',
+                            '❄️' => '❄️',
+                            '🎄' => '🎄',
+                            '🎆' => '🎆',
+                            '🎇' => '🎇',
+                            '✨' => '✨',
+                            '💥' => '💥',
+                        ])
+                        ->required()
+                        ->searchable()
+                        ->allowHtml(),
+                    
+                    TextInput::make('title')
+                        ->label('Title')
+                        ->required(),
+                    
+                    TextInput::make('description')
+                        ->label('Description')
+                        ->required(),
+                ])
+                ->columns(1)
+                ->addActionLabel('Add Service')
+                ->minItems(1)
+                ,
+                TextInput::make('whatsapp')
+                    ->placeholder("+213556223344")
+                    ->required(),
                 
             ]);
     }

@@ -8,27 +8,9 @@ class VitrineController extends Controller
 {
     public function show(Vitrine $vitrine): \Illuminate\View\View
     {
-
-        return view('vitrines.generic4', [
+        return view($vitrine->getThemeView(), [
             'vitrine' => $vitrine,
-            'name'=>"Mobile Phones",
-            'socialLinks'=>[
-                [
-                    'name'=>'Facebook',
-                    'icon'=>'fa-facebook',
-                    'url'=>'https://www.facebook.com/yourpage'
-                ],
-                [
-                    'name'=>'Twitter',
-                    'icon'=>'fa-twitter',
-                    'url'=>'https://www.twitter.com/yourprofile'
-                ],
-                [
-                    'name'=>'Instagram',
-                    'icon'=>'fa-instagram',
-                    'url'=>'https://www.instagram.com/yourprofile'
-                ]
-            ]
+            'style' => $vitrine->getStyleClass(),
         ]);
     }
 
@@ -105,7 +87,7 @@ public function index()
     return view('vitrines.generic3', [
         'name' => 'John Doe',
         'tagline' => 'Full Stack Developer & Creative Designer', // Set to null or empty to hide
-        'profileImage' => asset('images/profile.jpg'), // or null for placeholder
+        'profileImage' => "https://picsum.photos/280", // or null for placeholder
         
         'socialLinks' => [
             [
