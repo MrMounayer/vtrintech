@@ -22,6 +22,10 @@ class VitrineForm
                  ->prefix('https://')
                 ->suffix('.vtrinetech.com')
                 ->required(),
+
+                TextInput::make('whatsapp')
+                    ->placeholder("+213556223344")
+                    ->required(),
                 TextInput::make('name')
                     ->required(),
                     Textarea::make('description')
@@ -190,12 +194,8 @@ class VitrineForm
                         ->label('Description')
                         ->required(),
                 ])
-                ->columns(1)
                 ->addActionLabel('Add Service')
                 ,
-                TextInput::make('whatsapp')
-                    ->placeholder("+213556223344")
-                    ->required(),
                 
             ]);
     }

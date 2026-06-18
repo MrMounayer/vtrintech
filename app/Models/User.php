@@ -65,7 +65,11 @@ class User extends Authenticatable implements FilamentUser
         }
         
         // Default: no access
-        return true;
+        return match ($panelId) {
+            'admin' => in_array($this->role, ['admin', 'super_admin']),
+            'myvitrine' => in_array($this->role, ['user']),
+            default => false,
+        };
     }
 
     public function vitrines()
