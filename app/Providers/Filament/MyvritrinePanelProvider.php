@@ -30,7 +30,7 @@ class MyvritrinePanelProvider extends PanelProvider
             ->path('myvitrine')
             ->viteTheme('resources/css/filament/myvitrine/theme.css')
             ->login()
-            ->registration()
+            ->passwordReset()
             ->profile()
             ->colors([
                 'primary' => Color::Amber,
