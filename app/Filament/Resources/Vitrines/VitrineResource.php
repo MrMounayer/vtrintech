@@ -20,7 +20,7 @@ class VitrineResource extends Resource
 {
     protected static ?string $model = Vitrine::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::GlobeAsiaAustralia;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -51,7 +51,6 @@ class VitrineResource extends Resource
         return [
             'index' => ListVitrines::route('/'),
             'create' => CreateVitrine::route('/create'),
-            // 'view' => ViewVitrine::route('/{record}'),
             'edit' => EditVitrine::route('/{record}/edit'),
         ];
     }

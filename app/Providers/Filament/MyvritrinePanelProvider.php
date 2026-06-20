@@ -12,6 +12,7 @@ use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
+use Filament\Widgets\Stats;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -20,20 +21,20 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use DiogoGPinto\AuthUIEnhancer\AuthUIEnhancerPlugin;
 
+
+
 class MyvritrinePanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->plugins([
-                AuthUIEnhancerPlugin::make(),
-            ])
             ->default()
             ->id('myvitrine')
             ->path('myvitrine')
             ->viteTheme('resources/css/filament/myvitrine/theme.css')
             ->login()
-            ->registration()
+            ->passwordReset()
+            ->profile()
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -44,8 +45,6 @@ class MyvritrinePanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
