@@ -18,6 +18,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use WallaceMartinss\FilamentIconPicker\FilamentIconPickerPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -41,6 +42,7 @@ class AdminPanelProvider extends PanelProvider
                 AccountWidget::class,
                 FilamentInfoWidget::class,
             ])
+            // ->plugins([FilamentIconPickerPlugin::make()])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

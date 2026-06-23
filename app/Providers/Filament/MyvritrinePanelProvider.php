@@ -31,6 +31,9 @@ class MyvritrinePanelProvider extends PanelProvider
             ->default()
             ->id('myvitrine')
             ->path('myvitrine')
+            ->colors([
+                'primary' => Color::Blue,
+            ])
             ->viteTheme('resources/css/filament/myvitrine/theme.css')
             ->login()
             ->passwordReset()
